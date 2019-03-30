@@ -4,6 +4,7 @@ import './styles/BadgeNew.css'
 
 import header from '../images/badge-header.svg'
 import Badge from '../components/Badge';
+import BadgeForm from '../components/BadgeForm'
 
 class BadgeNew extends Component {
   render() {
@@ -17,7 +18,7 @@ class BadgeNew extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="col">
+            <div className="col-6">
               <Badge
                 firstName={'Oscar'}
                 lastName={'Zambrano'}
@@ -25,6 +26,9 @@ class BadgeNew extends Component {
                 twitter={'oscarzz116'}
                 avatarUrl={'https://avatars1.githubusercontent.com/u/30606586?s=460&v=4'}
               />
+            </div>
+            <div className="col-6">
+              <BadgeForm />
             </div>
           </div>
         </div>
