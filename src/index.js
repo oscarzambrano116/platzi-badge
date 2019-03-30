@@ -7,4 +7,12 @@ import Badge from './components/Badge'
 
 const container = document.querySelector('#app');
 
-ReactDOM.render(<Badge />, container);
+ReactDOM.render(
+  <Badge 
+    firstName={'Oscar'}
+    lastName={'Zambrano'}
+    jobTitle={'Frontend Engineer'}
+    twitter={'oscarzz116'}
+    avatarUrl={'https://www.gravatar.com/avatar?d=identicon'}
+  />, 
+container);
