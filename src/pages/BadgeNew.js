@@ -7,7 +7,42 @@ import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm'
 
 class BadgeNew extends Component {
+  state = {
+    form: {
+      firstName: '',
+      lastName: '',
+      jobTitle: '',
+      email: '',
+      twitter: '', 
+    }
+  }
+
+  handleFormChange = (e) => {
+    const {
+      name,
+      value,  
+    } = e.target
+
+    this.setState((prevState) => ({
+      form: {
+        ...prevState.form,
+        [name]: value,
+      }
+    }))
+  }
+
   render() {
+    const {
+      form,
+      form: {
+        firstName,
+        lastName,
+        jobTitle,
+        twitter,
+        email,
+      },
+    } = this.state
+
     return (
       <div>
         <NavBar />
@@ -20,15 +55,19 @@ class BadgeNew extends Component {
           <div className="row">
             <div className="col-6">
               <Badge
-                firstName={'Oscar'}
-                lastName={'Zambrano'}
-                jobTitle={'Frontend Engineer'}
-                twitter={'oscarzz116'}
+                firstName={firstName}
+                lastName={lastName}
+                jobTitle={jobTitle}
+                twitter={twitter}
+                email={email}
                 avatarUrl={'https://avatars1.githubusercontent.com/u/30606586?s=460&v=4'}
               />
             </div>
             <div className="col-6">
-              <BadgeForm />
+              <BadgeForm 
+                handleFormChange={this.handleFormChange}
+                {...form} 
+              />
             </div>
           </div>
         </div>

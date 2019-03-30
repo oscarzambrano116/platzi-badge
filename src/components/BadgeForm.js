@@ -1,25 +1,6 @@
 import React, { Component } from 'react'
 
 class BadgeForm extends Component {
-  state = {
-    firstName: '',
-    lastName: '',
-    jobTitle: '',
-    email: '',
-    twitter: '',
-  }
-
-  handleChange = (e) => {
-    const {
-      name,
-      value
-    } = e.target
-
-    this.setState({
-      [name]: value,
-    })
-  }
-
   handleClick = (e) => {
     console.log('Button was submitted') 
   }
@@ -33,7 +14,8 @@ class BadgeForm extends Component {
       jobTitle,
       email,
       twitter,
-    } = this.state
+      handleFormChange,
+    } = this.props
 
     return (
       <div>
@@ -42,7 +24,7 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>First Name</label>
             <input 
-              onChange={this.handleChange} 
+              onChange={handleFormChange} 
               type="text" 
               name="firstName" 
               className="form-control"
@@ -53,7 +35,7 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>Last Name</label>
             <input 
-              onChange={this.handleChange} 
+              onChange={handleFormChange} 
               type="text" 
               name="lastName" 
               className="form-control"
@@ -64,7 +46,7 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>Job Title</label>
             <input 
-              onChange={this.handleChange} 
+              onChange={handleFormChange} 
               type="text" 
               name="jobTitle" 
               className="form-control"
@@ -75,8 +57,8 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>Email</label>
             <input 
-              onChange={this.handleChange} 
-              type="text" 
+              onChange={handleFormChange} 
+              type="email" 
               name="email" 
               className="form-control"
               value={email}
@@ -86,7 +68,7 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>Twitter</label>
             <input 
-              onChange={this.handleChange} 
+              onChange={handleFormChange} 
               type="text" 
               name="twitter" 
               className="form-control"
