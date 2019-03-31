@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import NavBar from '../components/NavBar'
 import BadgesListItem from '../components/BadgesListItem'
 import './styles/Badges.css'
 
@@ -45,9 +44,7 @@ class Badges extends Component {
   render() {
     const { data } = this.state
     return (
-      <div>
-        <NavBar />
-        
+      <Fragment>
         <div className="Badges">
           <div className="Badges__hero">
             <div className="Badges__container">
@@ -75,7 +72,7 @@ class Badges extends Component {
             </ul>
           </div>
         </div>
-      </div>
+      </Fragment>
     )
   }
 }

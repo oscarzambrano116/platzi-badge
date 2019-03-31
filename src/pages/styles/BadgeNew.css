@@ -6,3 +6,9 @@
   margin-bottom: 1rem;
   color: #ffffff;
 }
+
+.Badges__hero>.Badges__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

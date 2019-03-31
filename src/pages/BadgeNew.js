@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import NavBar from '../components/NavBar'
+import React, { Component, Fragment } from 'react'
 import './styles/BadgeNew.css'
 
 import header from '../images/badge-header.svg'
@@ -44,11 +43,13 @@ class BadgeNew extends Component {
     } = this.state
 
     return (
-      <div>
-        <NavBar />
-
-        <div className="BadgeNew__hero">
-          <img src={header} alt="Logo" className="img-fluid"/>
+      <Fragment>
+        <div className="Badges">
+          <div className="Badges__hero">
+            <div className="Badges__container">
+              <img className="Badges__conf-logo" src={header} alt="Conf Logo"/>
+            </div>
+          </div>
         </div>
 
         <div className="container">
@@ -71,7 +72,7 @@ class BadgeNew extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     )
   }
 }
