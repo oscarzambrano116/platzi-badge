@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import BadgesListItem from '../components/BadgesListItem'
+import PageLoading from '../components/PageLoading'
+import PageError from '../components/PageError'
 import './styles/Badges.css'
 import confLogo from '../images/badge-header.svg'
 import api from '../api'
@@ -45,9 +47,9 @@ class Badges extends Component {
       error,
     } = this.state
 
-    if (loading) return 'Loading...'
+    if (loading) return <PageLoading />
 
-    if (error) return `Error: ${error.message}`
+    if (error) return <PageError error={error} />
 
     return (
       <Fragment>
