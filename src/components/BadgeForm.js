@@ -10,6 +10,7 @@ class BadgeForm extends Component {
       twitter,
       onChange,
       onSubmit,
+      error,
     } = this.props
 
     return (
@@ -72,6 +73,14 @@ class BadgeForm extends Component {
           </div>
 
           <button onClick={this.onSubmit} className="btn btn-primary">Save</button>
+
+          {
+            error && (
+              <p className="text-danger">
+                {error.message}
+              </p>
+            )
+          }
         </form>
       </div>
     )

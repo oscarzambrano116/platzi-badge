@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react'
-import './styles/BadgeNew.css'
+import PageLoading from '../components/PageLoading'
+import PageError from '../components/PageError'
 
 import confLogo from '../images/platziconf-logo.svg'
 import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm'
 
 import api from '../api'
+
+import './styles/BadgeNew.css'
 
 class BadgeNew extends Component {
   state = {
@@ -36,7 +39,16 @@ class BadgeNew extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault()
-    const { form } = this.state
+    const { 
+      state: {
+        form 
+      },
+      props: {
+        history: {
+          push,
+        },
+      },
+    } = this
 
     try {
       this.setState({
@@ -44,7 +56,7 @@ class BadgeNew extends Component {
         error: null,
       })
       await api.badges.create(form)
-      this.setState({ loading: false })
+      this.setState({ loading: false }, () => push('/badges'))
     } catch (error) {
       this.setState({
         loading: false,
@@ -55,8 +67,12 @@ class BadgeNew extends Component {
 
   render() {
     const {
+      loading,
+      error,
       form,
     } = this.state
+
+    if (loading) return <PageLoading />
 
     return (
       <Fragment>
@@ -77,6 +93,7 @@ class BadgeNew extends Component {
               <BadgeForm 
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
+                error={error}
                 {...form} 
               />
             </div>
