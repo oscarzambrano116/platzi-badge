@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 
 class BadgeForm extends Component {
-  handleClick = (e) => {
-    console.log('Button was submitted') 
-  }
-
-  handleSubmit = (e) => e.preventDefault()
-
   render() {
     const {
       firstName,
@@ -14,17 +8,18 @@ class BadgeForm extends Component {
       jobTitle,
       email,
       twitter,
-      handleFormChange,
+      onChange,
+      onSubmit,
     } = this.props
 
     return (
       <div>
         <h1>New Attendant</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={onSubmit}>
           <div className="form-group">
             <label>First Name</label>
             <input 
-              onChange={handleFormChange} 
+              onChange={onChange} 
               type="text" 
               name="firstName" 
               className="form-control"
@@ -35,7 +30,7 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>Last Name</label>
             <input 
-              onChange={handleFormChange} 
+              onChange={onChange} 
               type="text" 
               name="lastName" 
               className="form-control"
@@ -46,7 +41,7 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>Job Title</label>
             <input 
-              onChange={handleFormChange} 
+              onChange={onChange} 
               type="text" 
               name="jobTitle" 
               className="form-control"
@@ -57,7 +52,7 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>Email</label>
             <input 
-              onChange={handleFormChange} 
+              onChange={onChange} 
               type="email" 
               name="email" 
               className="form-control"
@@ -68,7 +63,7 @@ class BadgeForm extends Component {
           <div className="form-group">
             <label>Twitter</label>
             <input 
-              onChange={handleFormChange} 
+              onChange={onChange} 
               type="text" 
               name="twitter" 
               className="form-control"
@@ -76,7 +71,7 @@ class BadgeForm extends Component {
             />
           </div>
 
-          <button onClick={this.handleClick} className="btn btn-primary">Save</button>
+          <button onClick={this.onSubmit} className="btn btn-primary">Save</button>
         </form>
       </div>
     )

@@ -12,3 +12,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+.Badges__conf-logo {
+  max-height: 100px;
+}

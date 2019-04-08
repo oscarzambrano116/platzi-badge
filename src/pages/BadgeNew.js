@@ -1,12 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import './styles/BadgeNew.css'
 
-import header from '../images/badge-header.svg'
+import confLogo from '../images/platziconf-logo.svg'
 import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm'
 
+import api from '../api'
+
 class BadgeNew extends Component {
   state = {
+    loading: false,
+    error: null,
     form: {
       firstName: '',
       lastName: '',
@@ -16,7 +20,7 @@ class BadgeNew extends Component {
     }
   }
 
-  handleFormChange = (e) => {
+  handleChange = (e) => {
     const {
       name,
       value,  
@@ -30,16 +34,28 @@ class BadgeNew extends Component {
     }))
   }
 
+  handleSubmit = async (e) => {
+    e.preventDefault()
+    const { form } = this.state
+
+    try {
+      this.setState({
+        loading: true,
+        error: null,
+      })
+      await api.badges.create(form)
+      this.setState({ loading: false })
+    } catch (error) {
+      this.setState({
+        loading: false,
+        error: error,
+      })
+    }
+  }
+
   render() {
     const {
       form,
-      form: {
-        firstName,
-        lastName,
-        jobTitle,
-        twitter,
-        email,
-      },
     } = this.state
 
     return (
@@ -47,7 +63,7 @@ class BadgeNew extends Component {
         <div className="Badges">
           <div className="Badges__hero">
             <div className="Badges__container">
-              <img className="Badges__conf-logo" src={header} alt="Conf Logo"/>
+              <img className="Badges__conf-logo" src={confLogo} alt="Conf Logo"/>
             </div>
           </div>
         </div>
@@ -55,18 +71,12 @@ class BadgeNew extends Component {
         <div className="container">
           <div className="row">
             <div className="col-6">
-              <Badge
-                firstName={firstName}
-                lastName={lastName}
-                jobTitle={jobTitle}
-                twitter={twitter}
-                email={email}
-                avatarUrl={'https://avatars1.githubusercontent.com/u/30606586?s=460&v=4'}
-              />
+              <Badge {...form} />
             </div>
             <div className="col-6">
               <BadgeForm 
-                handleFormChange={this.handleFormChange}
+                onChange={this.handleChange}
+                onSubmit={this.handleSubmit}
                 {...form} 
               />
             </div>
