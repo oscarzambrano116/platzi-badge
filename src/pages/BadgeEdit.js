@@ -7,9 +7,9 @@ import BadgeForm from '../components/BadgeForm'
 
 import api from '../api'
 
-import './styles/BadgeNew.css'
+import './styles/BadgeEdit.css'
 
-class BadgeNew extends Component {
+class BadgeEdit extends Component {
   state = {
     loading: false,
     error: null,
@@ -19,6 +19,38 @@ class BadgeNew extends Component {
       jobTitle: '',
       email: '',
       twitter: '', 
+    }
+  }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData = async () => {
+    const {
+      match: {
+        params: {
+          badgeId,
+        },
+      },
+    } = this.props
+
+    this.setState({
+      loading: true,
+      error: null,
+    })
+
+    try {
+      const data = await api.badges.read(badgeId)
+      this.setState({
+        loading: false,
+        form: data,
+      })
+    } catch (error) {
+      this.setState({
+        loading: false,
+        error,
+      })
     }
   }
 
@@ -46,6 +78,11 @@ class BadgeNew extends Component {
         history: {
           push,
         },
+        match: {
+          params: {
+            badgeId,
+          },
+        },
       },
     } = this
 
@@ -54,7 +91,7 @@ class BadgeNew extends Component {
         loading: true,
         error: null,
       })
-      await api.badges.create(form)
+      await api.badges.update(badgeId, form)
       this.setState({ loading: false }, () => push('/badges'))
     } catch (error) {
       this.setState({
@@ -89,7 +126,7 @@ class BadgeNew extends Component {
               <Badge {...form} />
             </div>
             <div className="col-6">
-              <h1>New Attendant</h1>
+              <h1>Edit Attendant</h1>
               <BadgeForm 
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
@@ -104,4 +141,4 @@ class BadgeNew extends Component {
   }
 }
 
-export default BadgeNew
+export default BadgeEdit

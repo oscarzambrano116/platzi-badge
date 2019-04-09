@@ -74,7 +74,12 @@ class Badges extends Component {
                 data.length ? (
                   data.map((badge) => (
                     <li key={badge.id}>
-                      <BadgesListItem {...badge} />
+                      <Link 
+                        className="text-reset text-decoration-none" 
+                        to={`/badges/${badge.id}/edit`}
+                      >
+                        <BadgesListItem {...badge} />
+                      </Link>
                     </li>
                   ))
                 ) : (
