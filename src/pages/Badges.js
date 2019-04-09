@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import BadgesListItem from '../components/BadgesListItem'
+import MiniLoader from '../components/MiniLoader'
 import PageLoading from '../components/PageLoading'
 import PageError from '../components/PageError'
 import './styles/Badges.css'
@@ -18,6 +19,11 @@ class Badges extends Component {
 
   componentDidMount() {
     this.fetchData()
+    this.intervalId = setInterval(this.fetchData, 5000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId)
   }
 
   fetchData = async () => {
@@ -47,7 +53,7 @@ class Badges extends Component {
       error,
     } = this.state
 
-    if (loading) return <PageLoading />
+    if (loading && !data) return <PageLoading />
 
     if (error) return <PageError error={error} />
 
@@ -94,6 +100,12 @@ class Badges extends Component {
             </ul>
           </div>
         </div>
+
+        {
+          loading && (
+            <MiniLoader />
+          )
+        }
       </Fragment>
     )
   }
