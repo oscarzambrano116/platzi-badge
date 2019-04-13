@@ -1,12 +1,18 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
+import DeleteBadgeModal from '../components/DeleteBadgeModal'
 import confLogo from '../images/platziconf-logo.svg'
 import Badge from '../components/Badge'
 
 import './styles/BadgeDetails.css'
 
-const BadgeDetails = ({ data }) => {
+const BadgeDetails = ({
+  data,
+  onCloseModal, 
+  onOpenModal, 
+  modalIsOpen, 
+  onDeleteBadge,
+}) => {
   const {
     id,
     firstName,
@@ -42,13 +48,12 @@ const BadgeDetails = ({ data }) => {
                 </div>
 
                 <div>
-                  <button className="btn btn-danger">Delete</button>
-                  {
-                    ReactDOM.createPortal(
-                      <h1>Portal Modal</h1>, 
-                      document.querySelector('#modal')
-                    )
-                  }
+                  <button className="btn btn-danger" onClick={onOpenModal}>Delete</button>
+                  <DeleteBadgeModal 
+                    isOpen={modalIsOpen}
+                    onClose={onCloseModal}
+                    onDeleteBadge={onDeleteBadge}
+                  />
                 </div>
               </div>
             </div>
