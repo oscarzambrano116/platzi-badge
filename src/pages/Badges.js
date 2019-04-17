@@ -4,6 +4,7 @@ import BadgesListItem from '../components/BadgesListItem'
 import MiniLoader from '../components/MiniLoader'
 import PageLoading from '../components/PageLoading'
 import PageError from '../components/PageError'
+import SearchFilter from '../components/SearchFilter'
 import './styles/Badges.css'
 import confLogo from '../images/badge-header.svg'
 import api from '../api'
@@ -46,6 +47,19 @@ class Badges extends Component {
     }
   }
 
+  handleOnFilter = (query) => {
+    const queryFormatted = query.toLowerCase()
+    const { data } = this.state
+    const dataFiltered = data.filter(({ firstName, lastName}) => {
+      return `${firstName} ${lastName}`.toLowerCase().includes(queryFormatted)
+    })
+
+    this.setState((prevState) => ({
+      ...prevState,
+      data: dataFiltered,
+    }))
+  }
+
   render() {
     const {
       loading, 
@@ -75,6 +89,7 @@ class Badges extends Component {
 
         <div className="Badges__list">
           <div className="Badges__container">
+            <SearchFilter onFilter={this.handleOnFilter} />
             <ul className="list-unstyled">
               {
                 data.length ? (
@@ -98,14 +113,13 @@ class Badges extends Component {
                 )
               }
             </ul>
+            {
+              loading && (
+                <MiniLoader />
+              )
+            }
           </div>
         </div>
-
-        {
-          loading && (
-            <MiniLoader />
-          )
-        }
       </Fragment>
     )
   }
